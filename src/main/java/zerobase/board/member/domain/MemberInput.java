@@ -1,9 +1,7 @@
-package zerobase.board.domain;
+package zerobase.board.member.domain;
 
 import lombok.Data;
 import lombok.ToString;
-
-import javax.persistence.Entity;
 
 @ToString
 @Data // getter, setter

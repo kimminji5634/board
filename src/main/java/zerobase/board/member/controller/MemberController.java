@@ -1,23 +1,25 @@
-package zerobase.board.controller;
+package zerobase.board.member.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import zerobase.board.domain.Member;
-import zerobase.board.domain.MemberInput;
-import zerobase.board.service.MemberService;
+import zerobase.board.member.domain.MemberInput;
+import zerobase.board.member.service.MemberService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.security.Principal;
 
 @RequiredArgsConstructor // 생성자 주입
 @Controller
 public class MemberController {
 
     private final MemberService memberService;
+
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
 
     @GetMapping("/member/register")
     public String register() {

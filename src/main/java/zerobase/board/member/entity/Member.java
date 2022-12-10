@@ -1,4 +1,4 @@
-package zerobase.board.domain;
+package zerobase.board.member.entity;
 
 import lombok.*;
 
@@ -30,7 +30,7 @@ public class Member {
     private boolean emailAuthYn;
     // 이메일 인증한 날짜 => emailAuthYn 이 true가 될 때의 시간
     private LocalDateTime emailAuthDt;
-    private Boolean adminYn;
+    private boolean adminYn;
     private LocalDateTime regDt;
 
 }
