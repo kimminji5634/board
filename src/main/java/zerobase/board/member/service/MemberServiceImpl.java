@@ -117,12 +117,12 @@ public class MemberServiceImpl implements MemberService{
 
         Member member = optionalMember.get();
 
-
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         if (member.isAdminYn()) {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        } else {
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
 
         // User 사용하려면 username, password, row 던져야함, User 들어가면 알 수 있음

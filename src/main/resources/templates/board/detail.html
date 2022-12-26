@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!--이걸 추가해야 타임리프 기능이 적용됨-->
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 조회</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+
+            // 삭제 버튼 클릭시 기능함
+            $('form[name=deleteForm]').on('submit', function () {
+
+                if(!confirm('게시글을 삭제하시겠습니까')) { // 취소를 누른 경우 아무일도 안 일어나도록
+                    return false;
+                }
+            });
+
+            /* /!*update-button 클릭시 맨 아래 작성한 updateForm 실행되도록 => 자바스크립트에서 작성해야 함*!/
+             $('form[name=updateForm]').on('submit', function () {
+
+                 // alert('1'); => 수정버튼 누르면 1 뜬다
+
+                 if (!confirm('게시글을 수정하시겠습니까?')) {
+                     return false;
+                 }
+             });*/
+        });
+    </script>
+</head>
+<body>
+<h1>게시글 상세페이지 입니다.</h1>
+
+<!--<div th:text="${detail}"> 전체 데이터 잘 나옴-->
+<form>
+    <div>
+        <input type="text" th:value="${detail.id}" readonly/> <!--name-->
+    </div>
+    <div>
+        <!--인덱스 사용하기 위해 테이블 연결되는 entity에 @Length 사용-->
+        <input type="text" th:value="${detail.title}" readonly/>
+    </div>
+    <div>
+        <!--인덱스 사용하기 위해 테이블 연결되는 entity에 @Length 사용-->
+        <input type="text" th:value="${detail.writer}" readonly/>
+    </div>
+    <div>
+        <textarea cols="100" rows="30" th:value="${detail.content}" th:text="${detail.content}" readonly></textarea>
+    </div>
+</form>
+
+
+<!--삭제 버튼-->
+<div class="inline-div">
+    <form name="deleteForm" method="post" action="/board/delete">
+        <input type="hidden" name="id" th:value="${detail.id}"/>
+        <button type="submit">삭제</button>
+    </form>
+</div>
+<!--수정 버튼-->
+<div>
+    <input type="hidden" name="id" th:value="${detail.id}"/>
+    <a type="submit" th:href="'/board/update?id=' + ${detail.id}">수정 페이지로 이동</a>
+</div>
+</body>
+</html>

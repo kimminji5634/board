@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!--이걸 추가해야 타임리프 기능이 적용됨-->
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 조회</title>
+</head>
+<body>
+<h1>게시글을 조회하세요</h1>
+
+<!--<div th:text="${detail}"> 전체 데이터 잘 나옴-->
+<!--<div th:text="${list}">-->
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>NO</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>내용</th>
+            <th>등록일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each ="list : ${lists}">
+            <td th:text="${list.id}"></td>
+            <input type="hidden" name="id" th:value="${list.id}"/> <!--이걸 써줘야 name을 붙여주어 서버로 name값 전달-->
+            <td>
+                <!--인덱스 사용하기 위해 테이블 연결되는 entity에 @Length 사용-->
+                <!--<p th:text="${#strings.substring(list.title,0,5)}"></p>--> <!--일부 문자열만 출력-->
+                <!--<a th:href="'/course?categoryId=' + ${y.id}">-->
+                <!--해당되는 상세 페이지 가야하므로 id 필요
+                    게시글 상세 페이ㅣ 컨트롤러에서 id를 받음 @RequestParam-->
+                <!--<a th:href="'/board?boardId=' + ${list.id}">-->
+                <a th:text="${#strings.substring(list.title,0,9)}" th:href="'/board/detail?id=' + ${list.id}"></a>
+            </td>
+            <td>
+                <p th:text="${list.writer}"></p>
+                <!--</a>-->
+            </td>
+            <td>
+                <p th:text="${#strings.substring(list.content,0,25)}"></p>
+            </td>
+            <td>
+                <p th:text="${list.regDt}"></p>
+            </td>
+            <td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/board">메인 페이지로 이동</a>
+</div>
+</body>
+</html>

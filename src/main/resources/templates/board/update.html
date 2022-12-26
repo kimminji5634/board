@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>게시글을 수정하세요</h1>
+<form method="post" action="/board/update">
+    <!--서버로 값 넘기려면 post, form, name 필수-->
+    <!--name 안넣어줘서 계속 수정이 안됐었음...!!!-->
+    <div>
+        <input type="text" name="id" th:value="${update.id}" readonly/> <!--name-->
+    </div>
+    <div>
+        <!--인덱스 사용하기 위해 테이블 연결되는 entity에 @Length 사용-->
+        <input type="text" name="title" th:value="${update.title}"/>
+    </div>
+    <div>
+        <!--인덱스 사용하기 위해 테이블 연결되는 entity에 @Length 사용-->
+        <input type="text" name="writer" th:value="${update.writer}" readonly/>
+    </div>
+    <div>
+        <textarea cols="100" rows="30" name="content" th:value="${update.content}" th:text="${update.content}"></textarea>
+    </div>
+    <button type="submit">게시글 수정하기</button>
+</form>
+<a href="/board">메인 페이지로 이동</a>
+</body>
+</html>
